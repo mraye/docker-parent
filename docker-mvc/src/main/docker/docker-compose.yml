@@ -1,8 +1,8 @@
 version: '3'
 services:
-  mysql1:
+  mysql:
     image: mysql:8.0.22
-    container_name: mysql1
+    container_name: mysql
     restart: always
     volumes:
       - $PWD/data:/var/lib/mysql
@@ -18,7 +18,7 @@ services:
       - micro
   mvc-app:
     build:
-      context: ../java
+      context: ./
       dockerfile: ./Dockerfile
     environment:
       TZ: Asia/Shanghai
@@ -27,7 +27,7 @@ services:
     volumes:
       - $PWD/log:/app/logs
     depends_on:
-      - mysql1
+      - mysql
     networks:
       - micro
 
